@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Churn Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #00c6ff;
+            --secondary-color: #0072ff;
+            --background-color: #f9f9f9;
+            --text-color: #333;
+            --button-hover-color: #005bb5;
+            --white-color: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+        }
+
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--white-color);
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .tieude {
+            background-color: aqua;
+            display: flex;
+    
+        }
+
+        .tieude h1 {
+            display: flex;
+            padding-left: 90px;
+        }
+
+        form {
+            background: var(--white-color);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        form label {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="tieude">
+        <h1>Customer Churns Prediction</h1>
+    </div>
+    <form action="/predict" method="post">
+        <label>State:</label>
+        <input type="text" name="state"><br><br>
+        
+        <label>Account Length:</label>
+        <input type="number" name="account_length"><br><br>
+
+        <label>Area Code:</label>
+        <input type="number" name="area_code"><br><br>
+
+        <label>International Plan:</label>
+        <input type="text" name="international_plan"><br><br>
+
+        <label>Voice Mail Plan:</label>
+        <input type="text" name="voice_mail_plan"><br><br>
+
+        <label>Number of Voicemail Messages:</label>
+        <input type="number" name="number_vmail_messages"><br><br>
+
+        <label>Total Day Minutes:</label>
+        <input type="number" step="0.01" name="total_day_minutes"><br><br>
+
+        <label>Total Day Calls:</label>
+        <input type="number" name="total_day_calls"><br><br>
+
+        <label>Total Evening Minutes:</label>
+        <input type="number" step="0.01" name="total_eve_minutes"><br><br>
+
+        <label>Total Evening Calls:</label>
+        <input type="number" name="total_eve_calls"><br><br>
+
+        <label>Total Night Minutes:</label>
+        <input type="number" step="0.01" name="total_night_minutes"><br><br>
+
+        <label>Total Night Calls:</label>
+        <input type="number" name="total_night_calls"><br><br>
+
+        <label>Total International Minutes:</label>
+        <input type="number" step="0.01" name="total_intl_minutes"><br><br>
+
+        <label>Total International Calls:</label>
+        <input type="number" name="total_intl_calls"><br><br>
+
+        <label>Number of Customer Service Calls:</label>
+        <input type="number" name="number_customer_service_calls"><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+    <h2>{{ prediction_text }}</h2>
+    {% endif %}
+
+    <script>
+        function convertComma(input) {
+            // Thay thế dấu phẩy bằng dấu chấm
+            input.value = input.value.replace(',', '.');
+        }
+    </script>
+</body>
+</html>
